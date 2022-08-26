@@ -2,7 +2,8 @@
     "compilerOptions": {     // Onde coloco os códigos TS?
         "outDir": "dist/js", // Pasta que será jogada as conversões JS
         "target": "ES6",      // Converte o código JS em ECMAScript 6
-        "noEmitOnError": true // Não cria o arquivo JS enquanto o TS for reprovado na compilação
+        "noEmitOnError": true, // Não cria o arquivo JS enquanto o TS for reprovado na compilação
+        "noImplicitAny": true // Não permite não tipar os dados
     },
     "include": [   // Onde busco os códigos TS?
         "app/**/*" // Tudo que tiver em qualquer pasta dentro de app e qualquer arquivo
