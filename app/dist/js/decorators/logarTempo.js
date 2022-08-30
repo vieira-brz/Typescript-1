@@ -17,3 +17,4 @@ export function logarTempo(emSegundos = false) {
         return descriptor;
     };
 }
+//# sourceMappingURL=logarTempo.js.map

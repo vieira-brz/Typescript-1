@@ -2,8 +2,10 @@ import { domInjector } from '../decorators/domInjector.js';
 import { inspect } from '../decorators/inspect.js';
 import { logarTempo } from '../decorators/logarTempo.js';
 import { DiasDaSemana } from '../enums/dias-da-semana.js';
+import { NegociacaoDia } from '../interfaces/negociacaoDia.js';
 import { Negociacao } from '../models/negociacao.js';
 import { Negociacoes } from '../models/negociacoes.js';
+import { NegociacoesService } from '../services/negociacoesService.js';
 import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacoesView } from '../views/negociacoes-view.js';
 
@@ -20,6 +22,7 @@ export class NegociacaoController {
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
     private mensagemView = new MensagemView('#mensagemView');
+    private negociacaoSerice = new NegociacoesService;
 
     constructor() {
         this.negociacoesView.update(this.negociacoes);
@@ -43,6 +46,16 @@ export class NegociacaoController {
         this.negociacoes.adiciona(negociacao);
         this.limparFormulario();
         this.atualizaView();
+    }
+
+    public importaDados(): void {
+        this.negociacaoSerice.obterNegociacoes()
+        .then(negocicoesDeHoje => {
+            for(let negociacao of negocicoesDeHoje) {
+                this.negociacoes.adiciona(negociacao);
+            }
+            this.negociacoesView.update(this.negociacoes);
+        });
     }
 
     private ehDiaUtil(data: Date) {
